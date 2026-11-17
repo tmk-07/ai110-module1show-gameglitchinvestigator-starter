@@ -25,7 +25,7 @@ def parse_guess(raw: str):
 
     return True, value, None
 
-
+# FIX: Refactored with Claude from app.py and corrected the reversed high/low hint messages
 def check_guess(guess, secret):
     """
     Compare guess to secret and return (outcome, message).

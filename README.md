@@ -25,29 +25,33 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+The purpose of this project was to debug an AI-generated number-guessing game and verify the repairs with automated and manual tests. The original game displayed reversed higher and lower instructions, counted invalid input as an attempt, and did not completely reset its state when starting a new game. I moved `check_guess` and `parse_guess` from `app.py` into `logic_utils.py`, corrected the hint directions, and changed the submit logic so invalid input does not consume an attempt. I reviewed the AI-generated changes and added pytest regression tests to confirm the repaired comparison logic.
 
 ## 📸 Demo Walkthrough
 
-Describe your fixed game in numbered steps so a reader can follow along without watching a video:
-
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+1. The game starts on Normal difficulty and selects a secret number, such as 50.
+2. The user enters 40, and the game returns “Too Low” with the instruction “Go HIGHER!”
+3. The user enters 60, and the game returns “Too High” with the instruction “Go LOWER!”
+4. The user enters invalid text such as `hello`, and the game displays an error without consuming an attempt.
+5. The user enters 50, and the game recognizes the correct guess.
+6. The game displays the winning message and final score.
 
 **Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
 
 ## 🧪 Test Results
 
-```
-# Paste your pytest output here, e.g.:
-# pytest tests/
-# ========================= X passed in 0.XXs =========================
-```
+```text
+$ python -m pytest -v
+collected 5 items
+
+tests/test_game_logic.py::test_winning_guess PASSED
+tests/test_game_logic.py::test_guess_too_high PASSED
+tests/test_game_logic.py::test_guess_too_low PASSED
+tests/test_game_logic.py::test_too_high_message_says_go_lower PASSED
+tests/test_game_logic.py::test_too_low_message_says_go_higher PASSED
+
+5 passed in 0.01s
+
 
 ## 🚀 Stretch Features
 

@@ -111,6 +111,7 @@ if st.session_state.status != "playing":
     st.stop()
 
 if submit:
+    # FIX: Claude helped move validation before the attempt increment so invalid input does not use a turn
     ok, guess_int, err = parse_guess(raw_guess)
 
     if not ok:
